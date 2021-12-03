@@ -85,11 +85,10 @@ export function parse() : P.Parser<Term> {
       var [state, body] = parse()(state);
       return [state, Let(expr, x => bind(body, name, x))];
     }),
-    P.guard(P.match(/[a-z_]/),
-      (state) => {
-        var [state, name] = P.name1(state);
-        return [state, Var(name)];
-      }),
+    P.guard(P.match(/[a-z_]/), (state) => {
+      var [state, name] = P.name1(state);
+      return [state, Var(name)];
+    }),
     (state) => [state, null],
   ])(s);
 }
